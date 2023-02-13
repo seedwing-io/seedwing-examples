@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup seedwing policy server
+      - name: Install Seedwing CLI
         run: cargo install --git https://github.com/seedwing-io/seedwing-policy.git --branch main seedwing-policy-cli
 
       - name: Test
@@ -26,5 +26,5 @@ jobs:
       - name: Generate SBOM
         run: ./mvnw package
 
-      - name: Check SBOM
+      - name: Check dependencies for vulnerabilities
         run: seedwing-policy-cli -p policies eval --name example::not-affected < target/bom.json
