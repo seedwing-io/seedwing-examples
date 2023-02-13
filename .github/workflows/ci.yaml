@@ -33,4 +33,4 @@ jobs:
         run: ./mvnw package
 
       - name: Check dependencies for vulnerabilities
-        run: seedwing-policy-cli -p policies eval --name example::not-affected < target/bom.json
+        run: seedwing-policy-cli -p policies eval --name example::not-affected-fast < target/bom.json
