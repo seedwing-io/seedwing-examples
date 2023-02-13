@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    # Run on the main branch
+    branches:
+      - main
+  # Also on PRs, just be careful not to publish anything
+  pull_request:
+  # Allow to be called from other workflows (like "release")
+  workflow_call:
+  # But don't trigger on tags, as they are covered by the "release.yaml" workflow
+
+jobs:
+  ci:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup seedwing policy server
+        run: cargo install --git https://github.com/seedwing-io/seedwing-policy.git --branch main seedwing-policy-cli
+
+      - name: Test
+        run: ./mvnw test
+
+      - name: Generate SBOM
+        run: ./mvnw package
+
+      - name: Check SBOM
+        run: seedwing-policy-cli -p policies eval --name example::not-affected < target/bom.json
