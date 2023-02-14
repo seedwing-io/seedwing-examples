@@ -2,6 +2,8 @@
 
 Example projects in different programming languages and how to use them with Seedwing components.
 
+Each example has an entry in this README explaining where the project code, policies and the CI jobs are located.
+
 ## Checking for vulnerabilities in Java CycloneDX SBOMs in GitHub Actions
 
 This example uses the following:
