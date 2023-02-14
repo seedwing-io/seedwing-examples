@@ -1,4 +1,4 @@
-name: CI
+name: Java CI
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
   # But don't trigger on tags, as they are covered by the "release.yaml" workflow
 
 jobs:
-  ci:
+  policy-vulnerability-check:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -27,10 +27,10 @@ jobs:
         run: cargo install --git https://github.com/seedwing-io/seedwing-policy.git --branch main seedwing-policy-cli
 
       - name: Test
-        run: ./mvnw test
+        run: cd java && ./mvnw test
 
       - name: Generate SBOM
-        run: ./mvnw package
+        run: cd java && ./mvnw package
 
       - name: Check dependencies for vulnerabilities
-        run: seedwing-policy-cli -p policies eval --name example::not-affected-fast < target/bom.json
+        run: seedwing-policy-cli -p policies eval --name vulnerabilities::not-affected-fast < java/target/bom.json
