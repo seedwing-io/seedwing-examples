@@ -23,14 +23,15 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: Install Seedwing CLI
-        run: wget -O seedwing-policy-cli https://github.com/seedwing-io/seedwing-policy/releases/download/v0.1.0-alpha.3/seedwing-policy-cli-linux-amd64 && chmod 755 seedwing-policy-cli
-
       - name: Test
         run: cd java && ./mvnw test
 
       - name: Generate SBOM
         run: cd java && ./mvnw package
 
-      - name: Check dependencies for vulnerabilities
-        run: ./seedwing-policy-cli -p policies eval --name vulnerabilities::not-affected-fast < java/target/bom.json
+      - name: Apply company policies for the project SBOM
+        uses: seedwing-io/seedwing-action@v1
+        with:
+          policy-dir: policies
+          name: vulnerabilities::not-affected
+          input: java/target/bom.json
