@@ -1,1 +1,1 @@
-pattern check-sbom = vulnerabilities::not-affected && licenses::approved-license
+pattern check-sbom = vulnerabilities::sbom-not-affected && licenses::approved-license
