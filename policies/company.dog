@@ -1,0 +1,1 @@
+pattern check-sbom = vulnerabilities::not-affected && licenses::approved-license

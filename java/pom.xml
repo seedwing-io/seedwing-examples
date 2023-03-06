@@ -18,7 +18,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <quarkus.platform.group-id>
     io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>
-    2.16.2.Final</quarkus.platform.version>
+    2.16.4.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
   </properties>
