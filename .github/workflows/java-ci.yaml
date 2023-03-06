@@ -30,7 +30,7 @@ jobs:
         run: cd java && ./mvnw package
 
       - name: Apply company policies for the project SBOM
-        uses: seedwing-io/seedwing-action@v1
+        uses: seedwing-io/seedwing-action@v2
         with:
           policy-dir: policies
           name: company::check-sbom
