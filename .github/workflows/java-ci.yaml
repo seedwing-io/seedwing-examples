@@ -33,5 +33,5 @@ jobs:
         uses: seedwing-io/seedwing-action@v1
         with:
           policy-dir: policies
-          name: vulnerabilities::not-affected
+          name: company::check-sbom
           input: java/target/bom.json
