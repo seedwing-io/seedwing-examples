@@ -1,2 +1,10 @@
-/// For a given CycloneDX SBOM, check if any of the component package URLs for vulnerabilities and produce an OpenVEX document for it.
-pattern not-affected = cyclonedx::component-purls | lang::map<uri::purl> | osv::from-purl | openvex::from-osv | list::none<openvex::affected>
+/// For a given collection of purls, check for vulnerabilities and produce an OpenVEX document for it.
+pattern purl-not-affected = lang::map<uri::purl> | osv::from-purl | openvex::from-osv | openvex::not-affected
+
+/// Check for vulnerabilities in a given CycloneDX SBOM
+pattern sbom-not-affected = cyclonedx::component-purls | purl-not-affected
+
+/// Do the same for proxied requests for build dependencies
+pattern proxy-not-affected = {
+  purl: purl-not-affected
+}
